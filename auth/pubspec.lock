@@ -33,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  auth_header:
+    dependency: transitive
+    description:
+      name: auth_header
+      sha256: "0a3938128b6124530de93ce1a20ccb58639195fe7952f638248ea1bc0e5408eb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -69,66 +77,82 @@ packages:
     dependency: "direct main"
     description:
       name: conduit
-      sha256: ac21d1891d1bef4d4aab87a3307bc164f4a87005784441db798551ea7893421b
+      sha256: d3d29d83b0dd73b477ce778ee65da1f3e55729af7d7de802576c9693390cf11b
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.12"
+    version: "4.3.9"
   conduit_codable:
     dependency: transitive
     description:
       name: conduit_codable
-      sha256: c55b72773eef321568ee0d4858d87079acb75555920f6f1beca480f45738320f
+      sha256: "488bed56b9046e125869be602fb1a02452b2fd2d19743837a615a15a3755548c"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "4.3.7"
   conduit_common:
     dependency: transitive
     description:
       name: conduit_common
-      sha256: "421c95c7969bc16848d4e06d51b2f463ea6dbfa3af0da5cac734aaa9f3b2befd"
+      sha256: "240f88479de38425ad8b3b2810b9ab4ebaae4c897923f79fb0f2ef0cce8cc14f"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "4.3.7"
   conduit_config:
     dependency: transitive
     description:
       name: conduit_config
-      sha256: "360312cd46377b50df1058951a9766c8d4bc7f63d898ab8b32715ab41b261960"
+      sha256: d0066a15db2b11cd2d07022a3d426cb909cd8deef35c233b332131edbc4d3a01
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "4.3.7"
+  conduit_core:
+    dependency: "direct main"
+    description:
+      name: conduit_core
+      sha256: "5bffd0480be315eaf2f878ae352694f77add318d1d90a20c78864be82714015e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.8"
   conduit_isolate_exec:
     dependency: transitive
     description:
       name: conduit_isolate_exec
-      sha256: "7fcee80af99918f1a59a4369a88a66495435f0286057c81d55c402e68435e530"
+      sha256: c3e5cc052ac89cf36df7c01202b4239e6c507c01306779c59b2570d26b76b792
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "4.3.7"
   conduit_open_api:
     dependency: transitive
     description:
       name: conduit_open_api
-      sha256: ea90ed32aac55139a6609ac3dcf55db6a7c868eadc973ebe36e1477ab67f4da5
+      sha256: "83f3f3dfece0c36a111655dc1d8f555fb4b2ca695d36876c325eb157d5ef9cb7"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "4.3.7"
   conduit_password_hash:
     dependency: transitive
     description:
       name: conduit_password_hash
-      sha256: f7231e42de6f93abecd4ab2449747872f645ff6afd16f4f89ab2dcb97abb1c9d
+      sha256: "3735c77ac94b224b662f8c7dd19ac16743dc20eb2fe2092be061719572b758a7"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "4.3.7"
+  conduit_postgresql:
+    dependency: "direct main"
+    description:
+      name: conduit_postgresql
+      sha256: "8deced694b52a7ab8af02181180ad117a61d3124fe1b1326366d15e5ecaf06b9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.7"
   conduit_runtime:
     dependency: transitive
     description:
       name: conduit_runtime
-      sha256: "701e011bd9bf0de8a24aac6718a8ccf7165ce3015a2bb29188d7ff613ba7bdde"
+      sha256: ba03e98585fcfb4b493484b1e43ae36a8a9ea024b62e787dea91ae4e41322a85
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "4.3.7"
   convert:
     dependency: transitive
     description:
@@ -154,7 +178,7 @@ packages:
     source: hosted
     version: "3.0.2"
   file:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: file
       sha256: "1b92bec4fc2a72f59a8e15af5f52cd441e4a7860b49499d69dfa817af20e925d"
@@ -201,6 +225,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  jaguar_jwt:
+    dependency: "direct main"
+    description:
+      name: jaguar_jwt
+      sha256: c3ab24be5ba5f736f93eacfc94c4381bd93551a351ab5687e70c8d71a9916e8d
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   js:
     dependency: transitive
     description:
@@ -297,14 +329,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.6.1"
-  pub_cache:
-    dependency: transitive
-    description:
-      name: pub_cache
-      sha256: "6dda58dc069d153b7373977244ee6da4e6cb726c6e50903c1c4f278d0c111db5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.2"
   pub_semver:
     dependency: transitive
     description:
@@ -329,6 +353,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
+  recase:
+    dependency: transitive
+    description:
+      name: recase
+      sha256: e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
   sasl_scram:
     dependency: transitive
     description:
@@ -522,4 +554,4 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.19.1 <3.0.0"
+  dart: ">=2.19.4 <3.0.0"

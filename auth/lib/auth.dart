@@ -2,7 +2,8 @@
 import 'dart:io';
 
 import 'package:auth/controllers/app_auth_controller.dart';
-import 'package:conduit/conduit.dart';
+import 'package:conduit_core/conduit_core.dart';
+import 'package:conduit_postgresql/conduit_postgresql.dart';
 
 class AppService extends ApplicationChannel {
   late final ManagedContext managedContext;

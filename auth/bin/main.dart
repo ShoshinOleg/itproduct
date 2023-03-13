@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:conduit/conduit.dart';
 import 'package:auth/auth.dart';
+import 'package:conduit_core/conduit_core.dart';
 
 void main(List<String> arguments) async {
   final int port = int.parse(Platform.environment["PORT"] ?? "8081");

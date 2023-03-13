@@ -1,5 +1,5 @@
-import 'package:auth/models/response_model.dart';
-import 'package:conduit/conduit.dart';
+import 'package:auth/models/app_response_model.dart';
+import 'package:conduit_core/conduit_core.dart';
 
 import '../models/user.dart';
 
@@ -12,7 +12,7 @@ class AppAuthController extends ResourceController {
   Future<Response> signIn(@Bind.body() User user) async {
     if (user.password == null || user.username == null) {
       return Response.badRequest(
-        body: ResponseModel(message: "Поля password username обязательны")
+        body: AppResponseModel(message: "Поля password username обязательны")
       );
     }
 
@@ -24,7 +24,7 @@ class AppAuthController extends ResourceController {
     //fetch user
 
     return Response.ok(
-      ResponseModel(
+      AppResponseModel(
         data: {
           "id": fetchedUser.id,
           "refreshToken": fetchedUser.refreshToken,
@@ -39,7 +39,7 @@ class AppAuthController extends ResourceController {
   Future<Response> signUp(@Bind.body() User user) async {
     if (user.password == null || user.username == null || user.email == null) {
       return Response.badRequest(
-        body: ResponseModel(message: "Поля password username email обязательны")
+        body: AppResponseModel(message: "Поля password username email обязательны")
       );
     }
 
@@ -50,7 +50,7 @@ class AppAuthController extends ResourceController {
     //fetch user
 
     return Response.ok(
-      ResponseModel(
+      AppResponseModel(
         data: {
           "id": fetchedUser.id,
           "refreshToken": fetchedUser.refreshToken,
@@ -71,7 +71,7 @@ class AppAuthController extends ResourceController {
     //fetchUser
 
     return Response.ok(
-      ResponseModel(
+      AppResponseModel(
         data: {
           "id": fetchedUser.id,
           "refreshToken": fetchedUser.refreshToken,
