@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:auth/models/app_response_model.dart';
+import 'package:auth/utils/app_response.dart';
 import 'package:auth/utils/app_utils.dart';
 import 'package:conduit_core/conduit_core.dart';
 import 'package:jaguar_jwt/jaguar_jwt.dart';
@@ -38,21 +39,15 @@ class AppAuthController extends ResourceController {
         await _updateTokens(findedUser.id ?? -1, managedContext);
         final updatedUser = await managedContext
           .fetchObjectWithID<User>(findedUser.id);
-        return Response.ok(
-          AppResponseModel(
-            data: updatedUser?.backing.contents,
+        return AppResponse.ok(
+            body: updatedUser?.backing.contents,
             message: "Успешная авторизация"
-          )
         );
       } else {
         throw QueryException.input("Неверный пароль", []);
       }
-    } on QueryException catch (error) {
-      return Response.serverError(
-        body: AppResponseModel(
-          message: error.message
-        )
-      );
+    } catch (error) {
+      return AppResponse.serverError(error, message: "Ошибка авторизации");
     }
   }
 
@@ -80,18 +75,12 @@ class AppAuthController extends ResourceController {
         await _updateTokens(id, transaction);
       });
       final userData = await managedContext.fetchObjectWithID<User>(id);
-      return Response.ok(
-        AppResponseModel(
-          data: userData?.backing.contents,
-          message: "Успешная регистрация"
-        )
+      return AppResponse.ok(
+        body: userData?.backing.contents,
+        message: "Успешная регистрация"
       );
-    } on QueryException catch (error) {
-      return Response.serverError(
-        body: AppResponseModel(
-          message: error.message
-        )
-      );
+    } catch (error) {
+      return AppResponse.serverError(error, message: "Ошибка регистрации");
     }
   }
 
@@ -108,19 +97,13 @@ class AppAuthController extends ResourceController {
         );
       } else {
         await _updateTokens(id, managedContext);
-        return Response.ok(
-          AppResponseModel(
-            data: user?.backing.contents,
-            message: "Успешное обновление токенов"
-          )
+        return AppResponse.ok(
+          body: user?.backing.contents,
+          message: "Успешное обновление токенов"
         );
       }
     } catch (error) {
-      return Response.serverError(
-        body: AppResponseModel(
-          message: error.toString()
-        )
-      );
+      return AppResponse.serverError(error, message: "Ошибка обновления токенов");
     }
   }
   
