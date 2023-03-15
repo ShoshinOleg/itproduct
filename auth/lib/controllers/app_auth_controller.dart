@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:auth/models/app_response_model.dart';
+import 'package:auth/utils/app_utils.dart';
 import 'package:conduit_core/conduit_core.dart';
 import 'package:jaguar_jwt/jaguar_jwt.dart';
 
@@ -22,7 +23,9 @@ class AppAuthController extends ResourceController {
     try {
       final qFindUser = Query<User>(managedContext)
         ..where((user) => user.username).equalTo(user.username)
-        ..returningProperties((user) => [user.id, user.salt, user.hashPassword]);
+        ..returningProperties((user) => 
+          [user.id, user.salt, user.hashPassword]
+        );
       
       final findedUser = await qFindUser.fetchOne();
       if (findedUser == null) {
@@ -33,7 +36,8 @@ class AppAuthController extends ResourceController {
       );
       if (requestHashPassword == findedUser.hashPassword) {
         await _updateTokens(findedUser.id ?? -1, managedContext);
-        final updatedUser = await managedContext.fetchObjectWithID<User>(findedUser.id);
+        final updatedUser = await managedContext
+          .fetchObjectWithID<User>(findedUser.id);
         return Response.ok(
           AppResponseModel(
             data: updatedUser?.backing.contents,
@@ -92,24 +96,32 @@ class AppAuthController extends ResourceController {
   }
 
   @Operation.post("refresh")
-  Future<Response> refreshToken(@Bind.path("refresh") String refreshToken) async {
-    final User fetchedUser = User();
-
-    //connect to DB
-    //find user
-    //checkToken
-    //fetchUser
-
-    return Response.ok(
-      AppResponseModel(
-        data: {
-          "id": fetchedUser.id,
-          "refreshToken": fetchedUser.refreshToken,
-          "accessToken": fetchedUser.accessToken,
-          }, 
-        message: "Успешное обновление токенов"
-      ).toJson(),
-    );
+  Future<Response> refreshToken(
+    @Bind.path("refresh") String refreshToken
+  ) async {
+    try {
+      final id = AppUtils.getIdFromToken(refreshToken);
+      final user = await managedContext.fetchObjectWithID<User>(id);
+      if (user?.refreshToken != refreshToken) {
+        return Response.unauthorized(
+          body: AppResponseModel(message: "Token is not valid")
+        );
+      } else {
+        await _updateTokens(id, managedContext);
+        return Response.ok(
+          AppResponseModel(
+            data: user?.backing.contents,
+            message: "Успешное обновление токенов"
+          )
+        );
+      }
+    } catch (error) {
+      return Response.serverError(
+        body: AppResponseModel(
+          message: error.toString()
+        )
+      );
+    }
   }
   
   Map<String, dynamic> _getTokens(int id) {
