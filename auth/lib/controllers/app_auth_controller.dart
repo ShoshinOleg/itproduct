@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:auth/models/app_response_model.dart';
+import 'package:auth/utils/app_const.dart';
 import 'package:auth/utils/app_response.dart';
 import 'package:auth/utils/app_utils.dart';
 import 'package:conduit_core/conduit_core.dart';
@@ -108,14 +109,12 @@ class AppAuthController extends ResourceController {
   }
   
   Map<String, dynamic> _getTokens(int id) {
-    // TODO remove when release
-    final key = Platform.environment["SECRET_KEY"] ?? "SECRET_KEY";
+    final key = AppConst.secretKey;
     final accessClaimSet = JwtClaim(
       maxAge: Duration(hours: 1),
       otherClaims: { "id": id }
     );
     final refreshClainSet = JwtClaim(
-      maxAge: Duration(hours: 1),
       otherClaims: { "id": id }
     );
     final tokens = <String, dynamic>{};
