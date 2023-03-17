@@ -13,5 +13,5 @@ abstract class AppEnv {
     Platform.environment["DB_PASSWORD"] ?? "root";
   static final String dbHost = Platform.environment["DB_HOST"] ?? "localhost";
   static final String dbPort = Platform.environment["DB_PORT"] ?? "6201";
-  static final String dbDatabaseName = Platform.environment["DB_NAME"] ?? "";
+  static final String dbDatabaseName = Platform.environment["DB_NAME"] ?? "postgres";
 }
