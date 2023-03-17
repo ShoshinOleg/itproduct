@@ -1,0 +1,20 @@
+name: data
+description: Data Service
+version: 1.0.0
+
+environment:
+  sdk: '>=2.19.4 <3.0.0'
+
+dependencies:
+  conduit: ^4.3.2
+  conduit_core: ^4.3.2
+  conduit_postgresql: ^4.3.2
+
+  jaguar_jwt: 3.0.0
+
+dependency_overrides:
+   file: ^6.1.4
+
+dev_dependencies:
+  lints: ^2.0.0
+  test: ^1.21.0
