@@ -59,7 +59,7 @@ class AppPostController extends ResourceController {
         ..values.content = post.content;
       await qCreatePost.insert();
       return AppResponse.ok(
-        // body: user?.backing.contents,
+        // body: createdPost.backing.contents,
         message: "Успешное создания поста"
       );
     } catch (error) {
@@ -103,18 +103,15 @@ class AppPostController extends ResourceController {
   }
 
   @Operation.get()
-  Future<Response> getProfile() async {
+  Future<Response> getPosts(
+    @Bind.header(HttpHeaders.authorizationHeader) String header,
+  ) async {
     try {
-      // final id = AppUtils.getIdFromAuthHeader(header);
-      // final user = await managedContext.fetchObjectWithID<User>(id)
-      //   ?..removePropertiesFromBackingMap([
-      //     AppConst.accessToken, 
-      //     AppConst.refreshToken
-      //   ]);
-      return AppResponse.ok(
-        // body: user?.backing.contents,
-        message: "Успешное получение постов"
-      );
+      final currentAuthorId = AppUtils.getIdFromAuthHeader(header);
+      final qGetPosts = Query<Post>(managedContext)
+        ..where((x) => x.author?.id).equalTo(currentAuthorId);
+      final List<Post> posts = await qGetPosts.fetch();
+      return Response.ok(posts);
     } catch (error) {
       return AppResponse.serverError(
         error,
