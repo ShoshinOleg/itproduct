@@ -96,8 +96,9 @@ class AppAuthController extends ResourceController {
         );
       } else {
         await _updateTokens(id, managedContext);
+        final updatedUser = await managedContext.fetchObjectWithID<User>(id);
         return AppResponse.ok(
-          body: user?.backing.contents,
+          body: updatedUser?.backing.contents,
           message: "Успешное обновление токенов"
         );
       }

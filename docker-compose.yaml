@@ -24,6 +24,8 @@ services:
 
   db_auth: 
     container_name: db_auth
+    ports:
+      - "6101:6101"
     environment:
       - POSTGRES_PASSWORD=root
       - POSTGRES_USER=admin
