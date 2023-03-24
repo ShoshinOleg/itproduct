@@ -110,7 +110,7 @@ class AppAuthController extends ResourceController {
   Map<String, dynamic> _getTokens(int id) {
     final key = AppEnv.secretKey;
     final accessClaimSet = JwtClaim(
-      maxAge: Duration(hours: 1),
+      maxAge: Duration(minutes: AppEnv.time),
       otherClaims: { "id": id }
     );
     final refreshClainSet = JwtClaim(

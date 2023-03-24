@@ -9,6 +9,7 @@ services:
   auth:
     build: ./auth
     container_name: auth
+    restart: on-failure
     environment:
       - SECRET_KEY=SECRET_KEY
       - PORT=6100
@@ -17,6 +18,7 @@ services:
       - DB_HOST=db_auth
       - DB_PORT=6101
       - DB_NAME=postgres
+      - TIME=1
     depends_on:
       - db_auth
     networks:
@@ -24,6 +26,7 @@ services:
 
   db_auth: 
     container_name: db_auth
+    restart: on-failure
     ports:
       - "6101:6101"
     environment:
@@ -42,6 +45,7 @@ services:
   data:
     build: ./data
     container_name: data
+    restart: on-failure
     ports:
       - 6200:6200
     environment:
@@ -59,6 +63,7 @@ services:
 
   db_data: 
     container_name: db_data
+    restart: on-failure
     ports:
       - "6201:6201"
     environment:
@@ -76,6 +81,7 @@ services:
 
   nginx:
     container_name: nginx
+    restart: on-failure
     image: nginx:1.23.3-alpine
     networks:
       - internal_net

@@ -4,19 +4,6 @@ import 'package:jaguar_jwt/jaguar_jwt.dart';
 import '../models/app_response_model.dart';
 
 class AppResponse extends Response {
-  AppResponse.serverError(
-    dynamic error, 
-    {String? message}
-  ) : super.serverError(body: _getResponseModel(error, message));
-
-  AppResponse.ok({dynamic body, String? message})
-    : super.ok(AppResponseModel(data: body,message: message));
-
-  AppResponse.badRequest(
-    {String? message}
-  ) : super.badRequest(
-    body: AppResponseModel(message: message ?? "Ошибка запроса")
-  );
 
   static AppResponseModel _getResponseModel(dynamic error, String? message) {
     if (error is QueryException) {
@@ -37,4 +24,25 @@ class AppResponse extends Response {
       message: message ?? "Неизвестная ошибка"
     ); 
   }
+
+  AppResponse.serverError(
+    dynamic error, 
+    {String? message}
+  ) : super.serverError(body: _getResponseModel(error, message));
+
+  AppResponse.ok({dynamic body, String? message})
+    : super.ok(AppResponseModel(data: body,message: message));
+
+  AppResponse.badRequest(
+    {String? message}
+  ) : super.badRequest(
+    body: AppResponseModel(message: message ?? "Ошибка запроса")
+  );
+
+  AppResponse.unauthorized(
+    dynamic error,
+    {String? message}
+  ) : super.unauthorized(
+    body: _getResponseModel(error, message)
+  );
 }
