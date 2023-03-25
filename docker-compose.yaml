@@ -18,9 +18,11 @@ services:
       - DB_HOST=db_auth
       - DB_PORT=6101
       - DB_NAME=postgres
-      - TIME=1
+      - TIME=60
     depends_on:
       - db_auth
+    volumes:
+      - auth_vol:/app/
     networks:
       - internal_net
 
@@ -58,6 +60,8 @@ services:
       - DB_NAME=postgres
     depends_on:
       - db_data
+    volumes:
+      - data_vol:/app/
     networks:
       - internal_net
 
@@ -94,7 +98,9 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
 
 volumes: 
+  auth_vol: {}
   db_auth_vol: {}
+  data_vol: {}
   db_data_vol: {}
 
 networks:
