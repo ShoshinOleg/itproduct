@@ -116,11 +116,15 @@ class AppPostController extends ResourceController {
   @Operation.get()
   Future<Response> getPosts(
     @Bind.header(HttpHeaders.authorizationHeader) String header,
+    @Bind.query("fetchLimit") int fetchLimit,
+    @Bind.query("offset") int offset,
   ) async {
     try {
       final currentAuthorId = AppUtils.getIdFromAuthHeader(header);
       final qGetPosts = Query<Post>(managedContext)
-        ..where((x) => x.author?.id).equalTo(currentAuthorId);
+        ..where((x) => x.author?.id).equalTo(currentAuthorId)
+        ..fetchLimit = fetchLimit
+        ..offset = offset;
       final List<Post> posts = await qGetPosts.fetch();
       return Response.ok(posts);
     } catch (error) {

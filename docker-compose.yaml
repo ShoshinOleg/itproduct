@@ -22,7 +22,7 @@ services:
     depends_on:
       - db_auth
     volumes:
-      - auth_vol:/app/
+      - auth_vol:/app/migrations
     networks:
       - internal_net
 
@@ -61,7 +61,7 @@ services:
     depends_on:
       - db_data
     volumes:
-      - data_vol:/app/
+      - data_vol:/app/migrations
     networks:
       - internal_net
 
